@@ -25,6 +25,7 @@ public class FolderWatcher {
                         Path fileName = (Path) event.context();
                         System.out.println("Neue Datei erkannt: " + fileName);
                         // Hier kannst du die CSV-Verarbeitung starten
+                        //TODO: löschen der CSV
                     }
                 }
                 boolean valid = key.reset();
