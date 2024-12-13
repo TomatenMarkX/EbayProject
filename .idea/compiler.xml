@@ -11,4 +11,8 @@
       </profile>
     </annotationProcessing>
   </component>
+  <component name="JavacSettings">
+    <option name="DEBUGGING_INFO" value="false" />
+    <option name="DEPRECATION" value="false" />
+  </component>
 </project>

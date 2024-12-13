@@ -1,7 +1,7 @@
 package org.example;
 
 public class Product {
-//    private Long id;
+    private Long generatedId;
     private Long ItemNumber;
     private String title;
     private Long customLabel;
@@ -19,13 +19,13 @@ public class Product {
     private String ListingSite;
     private Long P_EAN;
 
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
+    public Long getGeneratedId() {
+        return generatedId;
+    }
+
+    public void setGeneratedId(Long id) {
+        this.generatedId = id;
+    }
 
     public Long getItemNumber() {
         return ItemNumber;
