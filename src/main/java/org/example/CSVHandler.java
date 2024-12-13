@@ -17,20 +17,36 @@ public class CSVHandler {
 
         try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
+            boolean firstLine = true;
             while ((line = br.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue;
+                }
                 String[] values = line.split(";"); // CSV sollte mit Kommas getrennt sein
-                if (values.length >= 3) {
+                if (values.length >= 28) {
                     Product product = new Product();
 
-                    product.setItemNumber(Long.parseLong(values[0].trim()));
+                    product.setItemNumber(Long.parseLong(values[0].trim().replace("\"", "")));
+                    System.out.println("0");
                     product.setTitle(String.valueOf(values[1].trim()));
-                    product.setCustomLabel(Long.parseLong(values[3].trim()));
-                    product.setAvailableQuantity(Integer.parseInt(values[4].trim()));
+                    System.out.println("1");
+                    if (!values[3].isEmpty()) {
+                        product.setCustomLabel(Long.parseLong(values[3].trim()));
+                        System.out.println("3");
+                    }
+                    product.setAvailableQuantity(Integer.parseInt(values[4].trim().replace("\"", "")));
+                    System.out.println("4");
                     product.setCurrency(String.valueOf(values[6].trim()));
+                    System.out.println("6");
                     product.setStartPrice(Double.parseDouble(values[7].trim()));
+                    System.out.println("7");
                     product.setCurrentPrice(Double.parseDouble(values[10].trim()));
+                    System.out.println("10");
                     product.setSoldQuantity(Integer.parseInt(values[11].trim()));
+                    System.out.println("11");
                     product.setWatchers(Integer.parseInt(values[12].trim()));
+                    System.out.println("12");
                     product.setStartDate(String.valueOf(values[14].trim()));
                     product.setEndDate(String.valueOf(values[15].trim()));
                     product.setEbayCategory1Name(String.valueOf(values[16].trim()));
