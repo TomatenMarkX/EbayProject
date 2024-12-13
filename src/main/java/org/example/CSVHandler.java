@@ -39,6 +39,7 @@ public class CSVHandler {
                     product.setListingSite(String.valueOf(values[26].trim()));
                     product.setP_EAN(Long.parseLong(values[28].trim()));
 
+                    System.out.println(product.toString());
                     products.add(product);
                 }
             }

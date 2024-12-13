@@ -154,4 +154,9 @@ public class Product {
     public void setP_EAN(Long P_EAN) {
         this.P_EAN = P_EAN;
     }
+
+    @Override
+    public String toString() {
+        return "Item Number :" + getItemNumber() + ", Title: " + getTitle() + ", Custom Label: " + getCustomLabel();
+    }
 }
