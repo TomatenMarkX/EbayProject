@@ -27,10 +27,14 @@ public class CSVHandler {
                 if (values.length >= 28) {
                     Product product = new Product();
 
-                    product.setItemNumber(Long.parseLong(values[0].trim().replace("\"", "")));
-                    System.out.println("0");
-                    product.setTitle(String.valueOf(values[1].trim()));
-                    System.out.println("1");
+                    if(!values[0].trim().replace("\"", "").isEmpty()) {
+                        product.setItemNumber(Long.parseLong(values[0].trim().replace("\"", "")));
+                        System.out.println("0");
+                    }
+                    if (!values[1].trim().isEmpty()) {
+                        product.setTitle(String.valueOf(values[1].trim()));
+                        System.out.println("1");
+                    }
                     if (!values[3].isEmpty()) {
                         product.setCustomLabel(Long.parseLong(values[3].trim()));
                         System.out.println("3");
@@ -43,22 +47,32 @@ public class CSVHandler {
                     System.out.println("7");
                     product.setCurrentPrice(Double.parseDouble(values[10].trim()));
                     System.out.println("10");
-                    product.setSoldQuantity(Integer.parseInt(values[11].trim()));
+                    product.setSoldQuantity(Integer.parseInt(values[11].trim().replace("\"", "")));
                     System.out.println("11");
-                    product.setWatchers(Integer.parseInt(values[12].trim()));
+                    product.setWatchers(Integer.parseInt(values[12].trim().replace("\"", "")));
                     System.out.println("12");
                     product.setStartDate(String.valueOf(values[14].trim()));
+                    System.out.println("14");
                     product.setEndDate(String.valueOf(values[15].trim()));
+                    System.out.println("15");
                     product.setEbayCategory1Name(String.valueOf(values[16].trim()));
-                    product.setEbayCategory1Number(Integer.parseInt(values[17].trim()));
+                    System.out.println("16");
+                    product.setEbayCategory1Number(Integer.parseInt(values[17].trim().replace("\"", "")));
+                    System.out.println("17");
                     product.setCondition(String.valueOf(values[20].trim()));
+                    System.out.println("20");
                     product.setListingSite(String.valueOf(values[26].trim()));
-                    product.setP_EAN(Long.parseLong(values[28].trim()));
+                    System.out.println("26");
+                    if (!values[28].trim().replace("\"", "").isEmpty()) {
+                        product.setP_EAN(Long.parseLong(values[28].trim()));
+                        System.out.println("28");
+                    }
 
                     System.out.println(product.toString());
                     products.add(product);
                 }
             }
+            System.out.println("Alle Produkte ausgelesen, Anzahl der Produkte: " + products.size());
             // Produkte in die Datenbank einfügen
             productDatabase.insertProducts(products);
 
