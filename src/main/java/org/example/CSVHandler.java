@@ -112,6 +112,7 @@ public class CSVHandler {
             System.out.println("Alle Produkte ausgelesen, Anzahl der Produkte: " + products.size());
             System.out.println(errors.toString());
             // Produkte in die Datenbank einfügen
+            productDatabase.initializeProductTable();
             productDatabase.insertProducts(products);
 
             System.out.println("CSV-Datei verarbeitet und Datenbank aktualisiert.");

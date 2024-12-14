@@ -1,20 +1,22 @@
 package org.example;
 
+import javax.swing.*;
+
 public class Product {
     private Long generatedId;
     private Long ItemNumber;
     private String title;
     private Long customLabel;
-    private int availableQuantity;
+    private Integer availableQuantity;
     private String currency;
-    private double startPrice;
-    private double currentPrice;
-    private int soldQuantity;
-    private int watchers;
+    private Double startPrice;
+    private Double currentPrice;
+    private Integer soldQuantity;
+    private Integer watchers;
     private String startDate;
     private String endDate;
     private String ebayCategory1Name;
-    private int ebayCategory1Number;
+    private Integer ebayCategory1Number;
     private String condition;
     private String ListingSite;
     private Long P_EAN;
@@ -51,7 +53,7 @@ public class Product {
         this.customLabel = customLabel;
     }
 
-    public int getAvailableQuantity() {
+    public Integer getAvailableQuantity() {
         return availableQuantity;
     }
 
@@ -67,7 +69,7 @@ public class Product {
         this.currency = currency;
     }
 
-    public double getStartPrice() {
+    public Double getStartPrice() {
         return startPrice;
     }
 
@@ -75,7 +77,7 @@ public class Product {
         this.startPrice = startPrice;
     }
 
-    public double getCurrentPrice() {
+    public Double getCurrentPrice() {
         return currentPrice;
     }
 
@@ -83,7 +85,7 @@ public class Product {
         this.currentPrice = currentPrice;
     }
 
-    public int getSoldQuantity() {
+    public Integer getSoldQuantity() {
         return soldQuantity;
     }
 
@@ -91,7 +93,7 @@ public class Product {
         this.soldQuantity = soldQuantity;
     }
 
-    public int getWatchers() {
+    public Integer getWatchers() {
         return watchers;
     }
 
@@ -123,7 +125,7 @@ public class Product {
         this.ebayCategory1Name = ebayCategory1Name;
     }
 
-    public int getEbayCategory1Number() {
+    public Integer getEbayCategory1Number() {
         return ebayCategory1Number;
     }
 
