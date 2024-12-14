@@ -2,9 +2,10 @@ package org.example;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -23,9 +24,36 @@ public class Gui extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        TabPane tabPane = new TabPane();
+
+        Tab produktTab = new Tab("Produkte");
+        produktTab.setClosable(false);
+        produktTab.setContent(createProductView());
+
+        Tab kundenTab = new Tab("Kunden");
+        kundenTab.setClosable(false);
+        kundenTab.setContent(createKundenView());
+
+        Tab bestellungenTab = new Tab("Bestellungen");
+        bestellungenTab.setClosable(false);
+        bestellungenTab.setContent(createBestellungenView());
+
+        tabPane.getTabs().addAll(produktTab, kundenTab, bestellungenTab);
+
+        BorderPane root = new BorderPane();
+        root.setCenter(tabPane);
+
+        // Scene und Stage
+        Scene scene = new Scene(root, 800, 600);
+        primaryStage.setTitle("Produkt- und Kundenverwaltung");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public BorderPane createProductView() {
         List<Product> products = productDB.getAllProducts();
 
-        TableView<Product> tableView = new TableView<>();
+        TableView<Product> productTableView = new TableView<>();
 
         TableColumn<Product, Long> itemNumberColumn = new TableColumn<>("Item Number");
         itemNumberColumn.setCellValueFactory(new PropertyValueFactory<>("itemNumber"));
@@ -75,16 +103,27 @@ public class Gui extends Application {
         TableColumn<Product, String> p_eanColumn = new TableColumn<>("P_ean");
         p_eanColumn.setCellValueFactory(new PropertyValueFactory<>("P_EAN"));
 
-        tableView.getColumns().addAll(itemNumberColumn, titleColumn, customLabelColumn, availableQuantityColumn, currencyColumn, startPriceColumn, currentPriceColumn, soldQuantityColumn, watchersColumn, startDateColumn, endDateColumn, ebayCategoryNameColumn, ebayCategoryNumberColumn, conditionColumn, listingSiteColumn, p_eanColumn);
+        productTableView.getColumns().addAll(itemNumberColumn, titleColumn, customLabelColumn, availableQuantityColumn, currencyColumn, startPriceColumn, currentPriceColumn, soldQuantityColumn, watchersColumn, startDateColumn, endDateColumn, ebayCategoryNameColumn, ebayCategoryNumberColumn, conditionColumn, listingSiteColumn, p_eanColumn);
 
-        tableView.getItems().setAll(products);
+        productTableView.getItems().setAll(products);
 
-        StackPane root = new StackPane();
-        root.getChildren().add(tableView);
-        Scene scene = new Scene(root, 800, 800);
-        primaryStage.setTitle("Produktübersicht");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        BorderPane productLayout = new BorderPane();
+        productLayout.setCenter(productTableView);
+        return productLayout;
+    }
+
+    public BorderPane createKundenView() {
+        BorderPane kundenLayout = new BorderPane();
+        return kundenLayout;
+    }
+
+    public BorderPane createBestellungenView() {
+        Button addBestellungButton = new Button("Neue Bestellung hinzufügen");
+        //addBestellungButton.setOnAction(e -> addBestellung);
+        BorderPane bestellungenLayout = new BorderPane();
+        bestellungenLayout.setBottom(addBestellungButton);
+
+        return bestellungenLayout;
     }
 }
 
