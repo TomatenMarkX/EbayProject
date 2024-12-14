@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class InMemoryDatabaseConnection {
-    private static final String URL = "jdbc:sqlite::memory:";
+    private static final String URL = "jdbc:sqlite::memory:?cache=shared";
 
     public Connection connect() {
         Connection connection = null;

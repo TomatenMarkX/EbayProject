@@ -61,10 +61,10 @@ public class Gui extends Application {
         endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
 
         TableColumn<Product, String> ebayCategoryNameColumn = new TableColumn<>("Ebay Category Name");
-        ebayCategoryNameColumn.setCellValueFactory(new PropertyValueFactory<>("ebayCategoryName"));
+        ebayCategoryNameColumn.setCellValueFactory(new PropertyValueFactory<>("ebayCategory1Name"));
 
         TableColumn<Product, Integer> ebayCategoryNumberColumn = new TableColumn<>("Ebay Category Number");
-        ebayCategoryNumberColumn.setCellValueFactory(new PropertyValueFactory<>("ebayCategoryNumber"));
+        ebayCategoryNumberColumn.setCellValueFactory(new PropertyValueFactory<>("ebayCategory1Number"));
 
         TableColumn<Product, String> conditionColumn = new TableColumn<>("Condition");
         conditionColumn.setCellValueFactory(new PropertyValueFactory<>("condition"));
@@ -73,7 +73,7 @@ public class Gui extends Application {
         listingSiteColumn.setCellValueFactory(new PropertyValueFactory<>("listingSite"));
 
         TableColumn<Product, String> p_eanColumn = new TableColumn<>("P_ean");
-        p_eanColumn.setCellValueFactory(new PropertyValueFactory<>("P_ean"));
+        p_eanColumn.setCellValueFactory(new PropertyValueFactory<>("P_EAN"));
 
         tableView.getColumns().addAll(itemNumberColumn, titleColumn, customLabelColumn, availableQuantityColumn, currencyColumn, startPriceColumn, currentPriceColumn, soldQuantityColumn, watchersColumn, startDateColumn, endDateColumn, ebayCategoryNameColumn, ebayCategoryNumberColumn, conditionColumn, listingSiteColumn, p_eanColumn);
 

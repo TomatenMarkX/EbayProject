@@ -38,7 +38,7 @@ public class ProductDatabase {
             statement.executeUpdate(createTableQuery);
             System.out.println("Neue Tabelle für Produkte erstellt");
         } catch (SQLException exception) {
-            System.out.println("Fehler beim Erstellen der Produktabelle");
+            System.out.println("Fehler beim Erstellen der Produkttabelle");
         }
     }
 
