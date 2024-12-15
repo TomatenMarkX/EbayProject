@@ -6,11 +6,16 @@ import com.opencsv.exceptions.CsvException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CSVHandler {
-    private final ProductDatabase productDatabase = new ProductDatabase();
+    private final ProductDatabase productDatabase;
+
+    public CSVHandler(Connection connection) {
+        this.productDatabase = new ProductDatabase(connection);
+    }
 
     public void processCSV(String csvFilePath) {
         List<Product> products = new ArrayList<>();
@@ -113,7 +118,9 @@ public class CSVHandler {
             System.out.println(errors.toString());
             // Produkte in die Datenbank einfügen
             productDatabase.initializeProductTable();
+            System.out.println("Connection zwischen initialize und insert " + productDatabase.getConnection());
             productDatabase.insertProducts(products);
+            System.out.println("Connection nach insert " + productDatabase.getConnection());
 
             System.out.println("CSV-Datei verarbeitet und Datenbank aktualisiert.");
 

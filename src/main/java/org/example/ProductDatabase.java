@@ -7,11 +7,12 @@ import java.util.List;
 public class ProductDatabase {
     Connection dbConnection;
 
-    public ProductDatabase() {
-        this.dbConnection = new InMemoryDatabaseConnection().connect();
+    public ProductDatabase(Connection dbConnection) {
+        this.dbConnection = dbConnection;
     }
 
     public void initializeProductTable() {
+        System.out.println("initializeProductTable");
         String createTableQuery =
                 """
                             CREATE TABLE IF NOT EXISTS products (
@@ -43,10 +44,10 @@ public class ProductDatabase {
     }
 
     public void insertProducts(List<Product> products) {
+        System.out.println("insertProducts " + dbConnection);
         String sql = "INSERT INTO products (item_number, title, custom_label, available_quantity, currency, start_price, current_price, sold_quantity, watchers, start_date, end_date, ebay_category1_name, ebay_category1_number, condition, listing_site, p_ean) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection connection = dbConnection;
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (PreparedStatement statement = dbConnection.prepareStatement(sql)) {
             for (Product product : products) {
                 if (product.getItemNumber() != null) {
                     statement.setLong(1, product.getItemNumber());
@@ -148,5 +149,9 @@ public class ProductDatabase {
             System.out.println("Fehler beim Abrufen der Produkttabelle " + exception.getMessage());
         }
         return products;
+    }
+
+    public Connection getConnection() {
+        return dbConnection;
     }
 }

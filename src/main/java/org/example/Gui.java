@@ -10,16 +10,20 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 
+import javax.naming.Context;
+import java.awt.event.ActionEvent;
+import java.sql.Connection;
 import java.util.List;
 
 public class Gui extends Application {
-    ProductDatabase productDB = new ProductDatabase();
+    Connection connection;
 
-    public static void main(String[] args) {
-        launch(args);
-        CustomerDatabase customerDB = new CustomerDatabase();
-        // Beispiel: Alle Kunden anzeigen
-        customerDB.listAllCustomers();
+    public void main(String[] args, Connection connection) {
+        if(connection != null) {
+            System.out.println("Connection is null");
+            this.connection = connection;
+            launch(args);
+        }
     }
 
     @Override
@@ -51,6 +55,9 @@ public class Gui extends Application {
     }
 
     public BorderPane createProductView() {
+        Connection connection = new InMemoryDatabaseConnection().connect();
+        ProductDatabase productDB = new ProductDatabase(connection);
+
         List<Product> products = productDB.getAllProducts();
 
         TableView<Product> productTableView = new TableView<>();
@@ -119,11 +126,30 @@ public class Gui extends Application {
 
     public BorderPane createBestellungenView() {
         Button addBestellungButton = new Button("Neue Bestellung hinzufügen");
-        //addBestellungButton.setOnAction(e -> addBestellung);
+        addBestellungButton.setOnAction(e -> addBestellung());
         BorderPane bestellungenLayout = new BorderPane();
         bestellungenLayout.setBottom(addBestellungButton);
 
         return bestellungenLayout;
+    }
+
+    public void addBestellung() {
+        TextInputDialog vornameDialog = new TextInputDialog();
+        vornameDialog.setTitle("Neue Bestellung");
+        vornameDialog.setHeaderText("Geben Sie den Vorname des Kunden ein");
+        vornameDialog.showAndWait().ifPresent(vorname -> {
+            TextInputDialog nameDialog = new TextInputDialog();
+            nameDialog.setTitle("Neue Bestellung");
+            nameDialog.setHeaderText("Geben sie den Nachnamen des Kunden ein");
+            nameDialog.showAndWait().ifPresent(nachName -> {
+                TextInputDialog artikelDialog = new TextInputDialog();
+                artikelDialog.setTitle("Neue Bestellung");
+                artikelDialog.setHeaderText("Geben sie den Namen des Artikels ein");
+                artikelDialog.showAndWait().ifPresent(artikel -> {
+                    Bestellung bestellung = new Bestellung(vorname, nachName, Bestellung.Status.IN_BEARBEITUNG);
+                });
+        });});
+
     }
 }
 

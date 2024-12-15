@@ -5,7 +5,7 @@ import java.nio.file.*;
 
 public class FolderWatcher {
     private final Path folderPath;
-    private final CSVHandler csvHandler = new CSVHandler();
+    //private final CSVHandler csvHandler = new CSVHandler();
 
     public FolderWatcher(String folderPath) {
         this.folderPath = Paths.get(folderPath);
